@@ -189,7 +189,9 @@ margin-bottom:10px;
   <button class="generate-btn" id="gen-btn" onclick="generate()">Gerar plano de aula ↗</button>
   <div class="sent-note" id="sent-note"></div>
 </div>
-async function sendPrompt(prompt){
+
+<script>
+  async function sendPrompt(prompt){
 
 const chatBox = document.getElementById("chat-box");
 
@@ -226,7 +228,6 @@ input.value = "";
 sendPrompt(message);
 
 }
-<script>
 let selectedLevel = '';
 let selectedLang = 'pt';
 
