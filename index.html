@@ -42,9 +42,6 @@ const supabaseClient = supabase.createClient(
 "SUA_ANON_PUBLIC_KEY"
 );
 
-let selectedLevel = "B1";
-let selectedLang = "pt";
-
 async function generate(){
 
 const prompt = "Create a complete English lesson plan for B1 level students.";
@@ -64,25 +61,22 @@ const data = await res.json();
 
 const text = data.choices?.[0]?.message?.content || "No response";
 
-resultBox.className = 'result-box';
-
-resultBox.textContent =
-  text || (isPt ? 'Nenhuma resposta recebida.' : 'No response received.');
+resultBox.innerText = text;
 
 } catch(e) {
 
-resultBox.className = 'result-box';
+resultBox.innerText = "Erro ao conectar com a IA.";
 
-resultBox.textContent = isPt
-  ? 'Erro ao conectar com a IA. Tente novamente.'
-  : 'Error connecting to AI. Please try again.';
+}
 
 }
 
 async function sendMessage(){
 
 const input = document.getElementById("userInput");
+
 const message = input.value;
+
 input.value = "";
 
 if(!message) return;
@@ -121,6 +115,10 @@ alert("Texto copiado!");
 
 }
 
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
