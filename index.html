@@ -345,8 +345,7 @@ function setLang(lang) {
   document.getElementById('lang-en').classList.toggle('active', lang === 'en');
 }
 
-function setLevel(l, btn) {
-  alert("FUNÇÃO FOI CHAMADA! Nível: " + l);
+window.setLevel = function(l, btn) {
   console.log("Clicou no nível:", l);
   selectedLevel = l;
   
@@ -358,7 +357,7 @@ function setLevel(l, btn) {
   
   console.log("Nível selecionado agora:", selectedLevel);
 }
-
+ 
 function toggleSkill(el) { el.classList.toggle('on'); }
 
 function getSkills() {
