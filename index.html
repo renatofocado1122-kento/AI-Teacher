@@ -180,6 +180,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
     <button class="copy-btn" onclick="copyResult()">Copiar texto</button>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const supabase = supabase.createClient(
+"https://SEU_PROJECT_URL.supabase.co",
+"SUA_ANON_PUBLIC_KEY"
+);
+</script>
 
 <script>
 let selectedLevel = '';
@@ -261,11 +269,14 @@ async function generate() {
   resultBox.textContent = isPt ? 'Gerando seu plano de aula... aguarde.' : 'Generating your lesson plan...';
 
   try {
-    const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
+   const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
+
 const data = await res.json();
+
 const text = data.choices?.[0]?.message?.content || "No response";
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
+
+resultBox.className = 'result-box';
+resultBox.textContent = text || (isPt ? 'Nenhuma resposta recebida.' : 'No response received.');
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1500,
         system: 'You are an expert English teacher and curriculum designer. When asked in Portuguese, write the entire lesson plan in Brazilian Portuguese (only English examples stay in English). Be practical, detailed and ready-to-use.',
