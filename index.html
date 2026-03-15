@@ -74,7 +74,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
       <button class="lang-btn" id="lang-en" onclick="setLang('en')">🇺🇸 Instructions in English</button>
     </div>
   </div>
+<hr class="divider">
 
+<h2>AI English Teacher Chat</h2>
+
+<div id="chat-box" style="
+background:white;
+border:1px solid #ddd;
+border-radius:10px;
+padding:15px;
+height:300px;
+overflow-y:auto;
+margin-bottom:10px;
+"></div>
+
+<input id="userInput" type="text" placeholder="Ask something in English..." />
+
+<button onclick="sendMessage()">Send</button>
+  
   <div class="templates">
     <h3>Templates rápidos</h3>
     <div class="tpl-grid">
@@ -172,7 +189,43 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
   <button class="generate-btn" id="gen-btn" onclick="generate()">Gerar plano de aula ↗</button>
   <div class="sent-note" id="sent-note"></div>
 </div>
+async function sendPrompt(prompt){
 
+const chatBox = document.getElementById("chat-box");
+
+chatBox.innerHTML += "<p><b>Teacher AI:</b> Thinking...</p>";
+
+try{
+
+const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
+
+const data = await res.json();
+
+const reply = data.choices?.[0]?.message?.content || "No response";
+
+chatBox.innerHTML = "<p><b>Teacher AI:</b><br><br>" + reply + "</p>";
+
+}catch(e){
+
+chatBox.innerHTML = "<p>Erro ao conectar com a IA.</p>";
+
+}
+
+}
+
+async function sendMessage(){
+
+const input = document.getElementById("userInput");
+
+const message = input.value;
+
+if(!message) return;
+
+input.value = "";
+
+sendPrompt(message);
+
+}
 <script>
 let selectedLevel = '';
 let selectedLang = 'pt';
