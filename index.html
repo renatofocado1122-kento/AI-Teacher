@@ -164,6 +164,42 @@ height:300px;
 overflow-y:auto;
 margin-bottom:10px;
 "></div>
+ <div style="display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
+  <button id="copiar-btn" onclick="copiarPlano()" style="
+    padding: 8px 16px;
+    background: #4a7c6f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+  ">
+    📋 Copiar plano
+  </button>
+  
+  <button id="pdf-btn" onclick="baixarPDF()" style="
+    padding: 8px 16px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+  ">
+    📥 Baixar PDF
+  </button>
+</div>
+
 
 <input id="userInput" type="text" placeholder="Ask something in English..." />
 
@@ -298,7 +334,7 @@ async function sendMessage(){
   
   // Formata e mostra
   const planoFormatado = formatLessonPlan(resposta);
-  chatBox.innerHTML = planoFormatado;
+   chatBox.innerHTML = planoFormatado;
 }
 let selectedLevel = '';
 let selectedLang = 'pt';
@@ -518,10 +554,71 @@ function formatLessonPlan(plainText) {
     html += '</div>';
     return html;
 }
-   // Envia o prompt e formata a resposta
-  const resposta = await sendPrompt(prompt);
+function copiarPlano() {
   const chatBox = document.getElementById("chat-box");
-  const planoFormatado = formatLessonPlan(resposta);
-  chatBox.innerHTML = planoFormatado;
+  const textoPlano = chatBox.innerText;
+  
+  if (!textoPlano || textoPlano.includes("Pensando...") || textoPlano === "") {
+    alert("Nenhum plano gerado ainda!");
+    return;
+  }
+  
+  navigator.clipboard.writeText(textoPlano).then(() => {
+    const btn = document.getElementById("copiar-btn");
+    const textoOriginal = btn.innerHTML;
+    btn.innerHTML = "✅ Copiado!";
+    btn.style.background = "#4CAF50";
+    
+    setTimeout(() => {
+      btn.innerHTML = textoOriginal;
+      btn.style.background = "#4a7c6f";
+    }, 2000);
+  }).catch(() => {
+    alert("Erro ao copiar. Tente novamente.");
+  });
+}
+
+// 🆕 FUNÇÃO PDF - ADICIONE AQUI
+function baixarPDF() {
+  const chatBox = document.getElementById("chat-box");
+  const conteudo = chatBox.innerHTML;
+  
+  if (!conteudo || conteudo.includes("Pensando...") || conteudo === "") {
+    alert("Nenhum plano gerado ainda!");
+    return;
+  }
+  
+  const btn = document.getElementById("pdf-btn");
+  const textoOriginal = btn.innerHTML;
+  btn.innerHTML = "🖨️ Preparando...";
+  
+  const win = window.open('', '_blank');
+  win.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Plano de Aula - English Teacher</title>
+      <style>
+        body { font-family: 'DM Sans', Arial, sans-serif; padding: 30px; max-width: 800px; margin: 0 auto; background: #f8f6f1; }
+        .plan-section { border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 16px; padding: 20px; background: white; }
+        h3 { margin: 0 0 12px 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
+        .dica-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 12px; font-style: italic; }
+        @media print { button { display: none; } }
+      </style>
+    </head>
+    <body>
+      <h1>📚 Plano de Aula - Inglês</h1>
+      ${conteudo}
+      <button onclick="window.print()" style="padding: 10px 20px; background: #4a7c6f; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px;">
+        🖨️ Imprimir / Salvar como PDF
+      </button>
+    </body>
+    </html>
+  `);
+  win.document.close();
+  
+  setTimeout(() => {
+    btn.innerHTML = textoOriginal;
+  }, 1000);
 }
 </script>
