@@ -268,42 +268,37 @@ margin-bottom:10px;
 </div>
 
 <script>
-  async function sendPrompt(prompt){
-
-const chatBox = document.getElementById("chat-box");
-
-chatBox.innerHTML += "<p><b>Teacher AI:</b> Thinking...</p>";
-
-try{
-
-const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
-
-const data = await res.json();
-
-const reply = data.choices?.[0]?.message?.content || "No response";
-
-chatBox.innerHTML = "<p><b>Teacher AI:</b><br><br>" + reply + "</p>";
-
-}catch(e){
-
-chatBox.innerHTML = "<p>Erro ao conectar com a IA.</p>";
-
-}
-
+async function sendPrompt(prompt){
+  try {
+    const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
+    const data = await res.json();
+    const reply = data.choices?.[0]?.message?.content || "No response";
+    
+    // RETORNA a resposta em vez de mostrar no chatBox
+    return reply;
+    
+  } catch(e) {
+    console.error("Erro:", e);
+    return "Erro ao conectar com a IA.";
+  }
 }
 
 async function sendMessage(){
-
-const input = document.getElementById("userInput");
-
-const message = input.value;
-
-if(!message) return;
-
-input.value = "";
-
-sendPrompt(message);
-
+  const input = document.getElementById("userInput");
+  const message = input.value;
+  if(!message) return;
+  input.value = "";
+  
+  // Mostra "pensando..."
+  const chatBox = document.getElementById("chat-box");
+  chatBox.innerHTML = "<p><b>Teacher AI:</b> Pensando...</p>";
+  
+  // Aguarda a resposta
+  const resposta = await sendPrompt(message);
+  
+  // Formata e mostra
+  const planoFormatado = formatLessonPlan(resposta);
+  chatBox.innerHTML = planoFormatado;
 }
 let selectedLevel = '';
 let selectedLang = 'pt';
@@ -523,6 +518,10 @@ function formatLessonPlan(plainText) {
     html += '</div>';
     return html;
 }
-  sendPrompt(prompt);
+   // Envia o prompt e formata a resposta
+  const resposta = await sendPrompt(prompt);
+  const chatBox = document.getElementById("chat-box");
+  const planoFormatado = formatLessonPlan(resposta);
+  chatBox.innerHTML = planoFormatado;
 }
 </script>
