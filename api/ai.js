@@ -1,16 +1,26 @@
-exportexport default async function handler(req, res) {
+export default async function handler(req, res) {
+  console.log("🚀 INÍCIO DA FUNÇÃO");
+  
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   
   const message = req.query.message;
-  console.log("1. Mensagem recebida:", message);
+  console.log("📨 Mensagem recebida:", message);
   
   if (!message) {
+    console.log("❌ Sem mensagem");
     return res.status(400).json({ error: "No message" });
   }
 
+  // Verificar se a chave existe
+  if (!process.env.GROQ_API_KEY) {
+    console.error("❌ GROQ_API_KEY não definida!");
+    return res.status(500).json({ error: "API key not configured" });
+  }
+  console.log("✅ GROQ_API_KEY existe");
+
   try {
-    console.log("2. GROQ_API_KEY existe?", !!process.env.GROQ_API_KEY);
+    console.log("🔄 Fazendo requisição para Groq...");
     
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
@@ -30,15 +40,16 @@ exportexport default async function handler(req, res) {
             content: message
           }
         ],
-        temperature: 0.7
-      }) // ✅ VÍRGULA AQUI É OPCIONAL, É O ÚLTIMO ITEM
-    }); // ✅ FECHAMENTO CORRETO DO fetch
+        temperature: 0.7,
+        max_tokens: 1024
+      })
+    });
 
-    console.log("3. Status da resposta:", response.status);
+    console.log("📊 Status da resposta:", response.status);
     
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("4. Erro da Groq:", errorText);
+      console.error("❌ Erro da Groq:", errorText);
       return res.status(500).json({ 
         error: "Erro da API Groq", 
         status: response.status,
@@ -47,8 +58,14 @@ exportexport default async function handler(req, res) {
     }
 
     const data = await response.json();
-    console.log("5. Resposta recebida:", data);
+    console.log("✅ Resposta recebida da Groq");
     
+    if (!data.choices?.[0]?.message?.content) {
+      console.error("❌ Resposta vazia da Groq:", data);
+      return res.status(500).json({ error: "Resposta vazia da Groq" });
+    }
+
+    console.log("🎉 Sucesso! Enviando resposta...");
     return res.status(200).json({
       choices: [{
         message: {
@@ -58,10 +75,17 @@ exportexport default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error("6. Erro no catch:", error);
+    console.error("💥 ERRO CATASTRÓFICO:", error);
+    console.error("Nome do erro:", error.name);
+    console.error("Mensagem:", error.message);
+    console.error("Stack:", error.stack);
+    
     return res.status(500).json({ 
       error: "Erro ao processar requisição",
-      message: error.message 
+      message: error.message,
+      name: error.name
     });
+  } finally {
+    console.log("🏁 FIM DA FUNÇÃO");
   }
 }
