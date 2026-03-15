@@ -342,7 +342,7 @@ function loadTemplate(key) {
   document.getElementById('f-notes').value = t.notes;
 }
 
-function generate() {
+async function generate() {
   const topic = document.getElementById('f-topic').value.trim();
   const warn = document.getElementById('warn');
   if (!selectedLevel || !topic) {
