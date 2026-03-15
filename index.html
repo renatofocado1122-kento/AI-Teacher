@@ -346,18 +346,16 @@ function setLang(lang) {
 }
 
 function setLevel(l, btn) {
-  console.log("Clicou no nível:", l); // Vai aparecer no console
+  alert("TESTE: Clicou em " + l);
+  console.log("Clicou no nível:", l);
   selectedLevel = l;
   
-  // Remove active de todos os botões
   document.querySelectorAll('.lvl-btn').forEach(b => {
     b.classList.remove('active');
   });
   
-  // Adiciona active no botão clicado
   btn.classList.add('active');
   
-  // Confirma que funcionou
   console.log("Nível selecionado agora:", selectedLevel);
 }
 
