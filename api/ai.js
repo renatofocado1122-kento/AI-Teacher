@@ -1,20 +1,21 @@
 export default async function handler(req, res) {
 
-const userMessage = req.query.message || "Hello";
+const message = req.query.message;
 
-const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-method: "POST",
-headers: {
-"Content-Type": "application/json",
-"Authorization": "Bearer " + process.env.GROQ_API_KEY
-},
-body: JSON.stringify({
-model: "llama-3.1-8b-instant",
-messages: [
-{
-role: "user",
-content: userMessage
+if(!message){
+return res.status(400).json({error:"No message"});
 }
+
+const response = await fetch("https://api.groq.com/openai/v1/chat/completions",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"Authorization":"Bearer SUA_GROQ_KEY"
+},
+body:JSON.stringify({
+model:"llama-3.3-70b-versatile",
+messages:[
+{role:"user",content:message}
 ]
 })
 });
