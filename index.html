@@ -262,7 +262,8 @@ async function generate() {
 
   try {
     const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
-      method: 'POST',
+const data = await res.json();
+const text = data.choices?.[0]?.message?.content || "No response";
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
@@ -272,7 +273,7 @@ async function generate() {
       })
     });
     const data = await res.json();
-    const text = (data.content||[]).map(i=>i.text||'').join('\n').trim();
+    const text = data.choices?.[0]?.message?.content || "No response";
     resultBox.className = 'result-box';
     resultBox.textContent = text || (isPt ? 'Nenhuma resposta recebida.' : 'No response received.');
   } catch(e) {
