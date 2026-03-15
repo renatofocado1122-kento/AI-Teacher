@@ -1,83 +1,12 @@
  
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gerador de Planos de Aula — AI English Teacher</title>
 <style>
-/* Adicione isso dentro da tag <style> existente */
-.lesson-plan-card {
-    max-width: 800px;
-    margin: 20px auto;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-.plan-section {
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    padding: 20px;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-
-.plan-section h3 {
-    margin: 0 0 12px 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 2px solid #f1f5f9;
-    padding-bottom: 8px;
-}
-
-.section-icon {
-    font-size: 1.5rem;
-}
-
-.objectives-list {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin: 8px 0;
-}
-
-.objectives-list li {
-    margin-bottom: 4px;
-    color: #334155;
-}
-
-.materials-list {
-    list-style-type: square;
-    padding-left: 20px;
-}
-
-.dica-box {
-    background: #f8fafc;
-    border-left: 4px solid #3b82f6;
-    padding: 12px;
-    margin: 12px 0;
-    border-radius: 0 8px 8px 0;
-    font-style: italic;
-}
-
-.timing-badge {
-    background: #e2e8f0;
-    padding: 4px 8px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #475569;
-}
-
-.diff-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 8px;
-}
-
-.diff-column {
-    background: #f8fafc;
-    padding: 12px;
-    border-radius: 8px;
-}
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --ink:#1a1a2e;--paper:#f8f6f1;--accent:#c8a96e;--accent2:#4a7c6f;
@@ -94,19 +23,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .lang-toggle{display:inline-flex;gap:0;margin-top:1.25rem;border:1.5px solid var(--border);border-radius:8px;overflow:hidden}
 .lang-btn{padding:7px 20px;font-size:13px;font-family:'DM Sans',sans-serif;border:none;background:transparent;cursor:pointer;color:var(--muted);font-weight:500;transition:all 0.15s}
 .lang-btn.active{background:var(--ink);color:#fff}
-.nav{display:flex;gap:6px;margin-bottom:1.5rem;flex-wrap:wrap}
-.nav-btn{padding:6px 14px;font-size:13px;border:0.5px solid var(--border);border-radius:20px;background:transparent;color:var(--muted);cursor:pointer}
-.nav-btn:hover{background:#f0ede8}
-.nav-btn.active{background:#E1F5EE;border-color:#1D9E75;color:#085041;font-weight:500}
-.panel{display:none}.panel.active{display:block}
-.field{margin-bottom:1rem}
-.field label{display:block;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.field input,.field select,.field textarea{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;background:var(--card);color:var(--ink);transition:border 0.15s}
-.field textarea{resize:vertical;min-height:72px;line-height:1.55}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent2)}
-.field.full{grid-column:1/-1}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
-.form-grid.three{grid-template-columns:1fr 1fr 1fr}
 .level-picker{margin-bottom:1.5rem}
 .level-picker h3{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem}
 .levels{display:flex;flex-wrap:wrap;gap:8px}
@@ -118,6 +34,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .lvl-btn[data-l="B2"].active{background:var(--b2);border-color:var(--tb2);color:var(--tb2)}
 .lvl-btn[data-l="C1"].active{background:var(--c1);border-color:var(--tc1);color:var(--tc1)}
 .lvl-btn[data-l="C2"].active{background:var(--c2);border-color:var(--tc2);color:var(--tc2)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-grid.three{grid-template-columns:1fr 1fr 1fr}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{font-family:'DM Sans',sans-serif;font-size:14px;padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;background:var(--card);color:var(--ink);transition:border 0.15s}
+.field textarea{resize:vertical;min-height:72px;line-height:1.55}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent2)}
+.field.full{grid-column:1/-1}
 .skills-wrap{margin-bottom:1rem}
 .skills-wrap label{font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
 .skills{display:flex;flex-wrap:wrap;gap:6px}
@@ -126,7 +50,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .skill-tag.on{background:var(--accent2);border-color:var(--accent2);color:#fff}
 .generate-btn{width:100%;padding:13px;font-size:15px;font-weight:500;font-family:'DM Sans',sans-serif;border:none;border-radius:10px;background:var(--ink);color:var(--paper);cursor:pointer;margin-top:4px;transition:background 0.2s}
 .generate-btn:hover{background:#2d2d4a}
-.generate-btn:disabled{background:var(--border);color:var(--muted);cursor:not-allowed}
 .divider{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
 .templates h3{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem}
 .tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;margin-bottom:1.5rem}
@@ -135,12 +58,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
 .tpl-card .tl{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:2px}
 .tpl-card .ts{font-size:11px;color:var(--muted)}
 .warn{padding:8px 14px;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;font-size:13px;color:#856404;display:none;margin-bottom:0.75rem}
-.sent-note{padding:10px 14px;background:#d4edda;border:1px solid #a3d9b1;border-radius:8px;font-size:13px;color:#155724;display:none;margin-top:0.75rem;line-height:1.5}
-.lang-pill{display:inline-block;font-size:11px;padding:2px 10px;border-radius:20px;font-weight:500;margin-left:8px;vertical-align:middle}
-.lang-pill.pt{background:#d4edda;color:#155724}
-.lang-pill.en{background:#cce5ff;color:#004085}
+.result-area{margin-top:2rem;display:none}
+.result-area h2{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:1rem}
+.result-box{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:1.5rem;font-size:14px;line-height:1.85;white-space:pre-wrap;color:var(--ink)}
+.result-box.loading{color:var(--muted);font-style:italic}
+.copy-btn{margin-top:1rem;padding:8px 20px;font-size:13px;font-family:'DM Sans',sans-serif;border:1.5px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;color:var(--muted)}
+.copy-btn:hover{border-color:var(--accent2);color:var(--accent2)}
+.lesson-plan-card{max-width:800px;margin:20px auto}
+.plan-section{border:1px solid #e2e8f0;border-radius:12px;margin-bottom:16px;padding:20px;background:white}
+.plan-section h3{margin:0 0 12px 0;font-size:1.25rem;border-bottom:2px solid #f1f5f9;padding-bottom:8px}
 </style>
-
+</head>
+<body>
 <div class="site">
   <div class="hero">
     <div class="hero-badge">Gerador de Planos de Aula</div>
@@ -151,60 +80,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);m
       <button class="lang-btn" id="lang-en" onclick="setLang('en')">🇺🇸 Instructions in English</button>
     </div>
   </div>
-<hr class="divider">
 
-<h2>AI English Teacher Chat</h2>
-
-<div id="chat-box" style="
-background:white;
-border:1px solid #ddd;
-border-radius:10px;
-padding:15px;
-height:300px;
-overflow-y:auto;
-margin-bottom:10px;
-"></div>
- <div style="display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
-  <button id="copiar-btn" onclick="copiarPlano()" style="
-    padding: 8px 16px;
-    background: #4a7c6f;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.3s ease;
-  ">
-    📋 Copiar plano
-  </button>
-  
-  <button id="pdf-btn" onclick="baixarPDF()" style="
-    padding: 8px 16px;
-    background: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.3s ease;
-  ">
-    📥 Baixar PDF
-  </button>
-</div>
-
-
-<input id="userInput" type="text" placeholder="Ask something in English..." />
-
-<button onclick="sendMessage()">Send</button>
-  
   <div class="templates">
     <h3>Templates rápidos</h3>
     <div class="tpl-grid">
@@ -280,7 +156,7 @@ margin-bottom:10px;
     </div>
     <div class="field full">
       <label>Observações especiais (opcional)</label>
-      <textarea id="f-notes" placeholder="ex: alunos tímidos, aula online, preparação para exame, foco em conversação, turma mista..."></textarea>
+      <textarea id="f-notes" placeholder="ex: alunos tímidos, aula online, preparação para exame, foco em conversação..."></textarea>
     </div>
   </div>
 
@@ -299,43 +175,17 @@ margin-bottom:10px;
   </div>
 
   <div class="warn" id="warn">Por favor, selecione um nível e informe o tópico da aula antes de gerar.</div>
-  <button class="generate-btn" id="gen-btn" onclick="generate()">Gerar plano de aula ↗</button>
-  <div class="sent-note" id="sent-note"></div>
+  <button class="generate-btn" onclick="generate()">Gerar plano de aula</button>
+
+  <div class="result-area" id="result-area">
+    <hr class="divider">
+    <h2>Seu plano de aula</h2>
+    <div class="result-box" id="result-box"></div>
+    <button class="copy-btn" onclick="copyResult()">Copiar texto</button>
+  </div>
 </div>
 
 <script>
-async function sendPrompt(prompt){
-  try {
-    const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
-    const data = await res.json();
-    const reply = data.choices?.[0]?.message?.content || "No response";
-    
-    // RETORNA a resposta em vez de mostrar no chatBox
-    return reply;
-    
-  } catch(e) {
-    console.error("Erro:", e);
-    return "Erro ao conectar com a IA.";
-  }
-}
-
-async function sendMessage(){
-  const input = document.getElementById("userInput");
-  const message = input.value;
-  if(!message) return;
-  input.value = "";
-  
-  // Mostra "pensando..."
-  const chatBox = document.getElementById("chat-box");
-  chatBox.innerHTML = "<p><b>Teacher AI:</b> Pensando...</p>";
-  
-  // Aguarda a resposta
-  const resposta = await sendPrompt(message);
-  
-  // Formata e mostra
-  const planoFormatado = formatLessonPlan(resposta);
-   chatBox.innerHTML = planoFormatado;
-}
 let selectedLevel = '';
 let selectedLang = 'pt';
 
@@ -345,19 +195,12 @@ function setLang(lang) {
   document.getElementById('lang-en').classList.toggle('active', lang === 'en');
 }
 
-window.setLevel = function(l, btn) {
-  console.log("Clicou no nível:", l);
+function setLevel(l, btn) {
   selectedLevel = l;
-  
-  document.querySelectorAll('.lvl-btn').forEach(b => {
-    b.classList.remove('active');
-  });
-  
+  document.querySelectorAll('.lvl-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  
-  console.log("Nível selecionado agora:", selectedLevel);
 }
- 
+
 function toggleSkill(el) { el.classList.toggle('on'); }
 
 function getSkills() {
@@ -365,12 +208,12 @@ function getSkills() {
 }
 
 const templates = {
-  a1kids:  {level:'A1',type:'Crianças (6–10 anos)',      dur:'30 minutos', size:'Grupo pequeno (2–8)',   topic:'Presente simples — rotinas diárias',       approach:'Comunicativa (CLT)',              notes:'Atividades divertidas, muita movimentação e jogos'},
-  a2teen:  {level:'A2',type:'Adolescentes (11–17 anos)', dur:'60 minutos', size:'Turma regular (9–20)',  topic:'Passado simples — atividades do fim de semana', approach:'PPP (Apresentar–Praticar–Produzir)', notes:'Trabalho em duplas e storytelling'},
-  b1adult: {level:'B1',type:'Adultos — geral',           dur:'60 minutos', size:'Grupo pequeno (2–8)',   topic:'Present perfect vs passado simples',       approach:'Comunicativa (CLT)',              notes:'Foco em conversação e exemplos do dia a dia'},
-  b2biz:   {level:'B2',type:'Adultos — inglês para negócios', dur:'90 minutos', size:'Aula particular (1 aluno)', topic:'Segundo condicional — decisões de negócios', approach:'Baseada em tarefas (TBL)', notes:'Contexto empresarial, vocabulário profissional'},
-  c1adv:   {level:'C1',type:'Adultos — geral',           dur:'60 minutos', size:'Grupo pequeno (2–8)',   topic:'Marcadores discursivos e coesão textual',  approach:'ESA (Engajar–Estudar–Ativar)',    notes:'Contextos acadêmicos e profissionais'},
-  c2mas:   {level:'C2',type:'Universitários',            dur:'90 minutos', size:'Grupo pequeno (2–8)',   topic:'Escrita acadêmica — argumentação',         approach:'Baseada em tarefas (TBL)',        notes:'Foco em nuance, registro e estilo'},
+  a1kids:  {level:'A1',type:'Crianças (6–10 anos)',           dur:'30 minutos', size:'Grupo pequeno (2–8)',        topic:'Presente simples — rotinas diárias',            approach:'Comunicativa (CLT)',                 notes:'Atividades divertidas, muita movimentação e jogos'},
+  a2teen:  {level:'A2',type:'Adolescentes (11–17 anos)',      dur:'60 minutos', size:'Turma regular (9–20)',       topic:'Passado simples — atividades do fim de semana', approach:'PPP (Apresentar–Praticar–Produzir)',  notes:'Trabalho em duplas e storytelling'},
+  b1adult: {level:'B1',type:'Adultos — geral',                dur:'60 minutos', size:'Grupo pequeno (2–8)',        topic:'Present perfect vs passado simples',            approach:'Comunicativa (CLT)',                 notes:'Foco em conversação e exemplos do dia a dia'},
+  b2biz:   {level:'B2',type:'Adultos — inglês para negócios', dur:'90 minutos', size:'Aula particular (1 aluno)', topic:'Segundo condicional — decisões de negócios',    approach:'Baseada em tarefas (TBL)',           notes:'Contexto empresarial, vocabulário profissional'},
+  c1adv:   {level:'C1',type:'Adultos — geral',                dur:'60 minutos', size:'Grupo pequeno (2–8)',        topic:'Marcadores discursivos e coesão textual',       approach:'ESA (Engajar–Estudar–Ativar)',       notes:'Contextos acadêmicos e profissionais'},
+  c2mas:   {level:'C2',type:'Universitários',                 dur:'90 minutos', size:'Grupo pequeno (2–8)',        topic:'Escrita acadêmica — argumentação',              approach:'Baseada em tarefas (TBL)',           notes:'Foco em nuance, registro e estilo'},
 };
 
 function loadTemplate(key) {
@@ -383,6 +226,45 @@ function loadTemplate(key) {
   document.getElementById('f-topic').value = t.topic;
   document.getElementById('f-approach').value = t.approach;
   document.getElementById('f-notes').value = t.notes;
+}
+
+const levelDesc = {
+  A1:'iniciante absoluto — linguagem muito simples, vocabulário básico, frases curtas',
+  A2:'básico — entende frases simples e expressões do dia a dia',
+  B1:'intermediário — lida com a maioria das situações cotidianas, alguns erros gramaticais',
+  B2:'intermediário avançado — fluente em tópicos familiares, bom controle gramatical',
+  C1:'avançado — uso flexível e eficaz da língua em contextos sociais, acadêmicos e profissionais',
+  C2:'fluente/proficiente — precisão e nuance quase nativas, plena fluência acadêmica e profissional',
+};
+
+async function sendPrompt(prompt){
+  try {
+    const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
+    const data = await res.json();
+    const reply = data.choices?.[0]?.message?.content || "No response";
+    return reply;
+  } catch(e) {
+    console.error("Erro:", e);
+    return "Erro ao conectar com a IA.";
+  }
+}
+
+function formatLessonPlan(plainText) {
+  const sections = plainText.split(/\d\./);
+  let html = '<div class="lesson-plan-card">';
+  
+  sections.forEach((section, index) => {
+    if (index === 0) return;
+    html += `
+      <div class="plan-section">
+        <h3>${index}. Seção ${index}</h3>
+        <div>${section.replace(/\n/g, '<br>')}</div>
+      </div>
+    `;
+  });
+  
+  html += '</div>';
+  return html;
 }
 
 async function generate() {
@@ -400,23 +282,11 @@ async function generate() {
   const approach = document.getElementById('f-approach').value;
   const notes    = document.getElementById('f-notes').value.trim();
   const skills   = getSkills();
-
-  const levelDesc = {
-    A1:'iniciante absoluto — linguagem muito simples, vocabulário básico, frases curtas',
-    A2:'básico — entende frases simples e expressões do dia a dia',
-    B1:'intermediário — lida com a maioria das situações cotidianas, alguns erros gramaticais',
-    B2:'intermediário avançado — fluente em tópicos familiares, bom controle gramatical',
-    C1:'avançado — uso flexível e eficaz da língua em contextos sociais, acadêmicos e profissionais',
-    C2:'fluente/proficiente — precisão e nuance quase nativas, plena fluência acadêmica e profissional',
-  };
-
-  const isPt = selectedLang === 'pt';
+  const isPt     = selectedLang === 'pt';
 
   const prompt = isPt
     ? `[GERADOR DE PLANO DE AULA — INGLÊS]
-Crie um plano de aula completo e detalhado de inglês com as seguintes especificações.
-IMPORTANTE: Escreva TODO o plano em PORTUGUÊS BRASILEIRO. Apenas os exemplos de frases, diálogos e exercícios em inglês devem aparecer em inglês — todo o resto (instruções, dicas, explicações, objetivos, materiais) deve estar em português.
-
+Crie um plano de aula completo e detalhado de inglês em PORTUGUÊS BRASILEIRO.
 NÍVEL: ${selectedLevel} — ${levelDesc[selectedLevel]}
 TIPO DE ALUNO: ${type}
 DURAÇÃO: ${dur}
@@ -426,206 +296,59 @@ ABORDAGEM PEDAGÓGICA: ${approach}
 HABILIDADES: ${skills}
 ${notes ? 'OBSERVAÇÕES: ' + notes : ''}
 
-Estruture o plano com as seguintes seções:
-
-1. VISÃO GERAL DA AULA
-   - Título, nível, duração, objetivos (3 metas claras e mensuráveis)
-
-2. MATERIAIS E PREPARAÇÃO
-   - Tudo que o professor precisa preparar antes da aula
-
-3. AQUECIMENTO (com tempo exato)
-   - Atividade engajante para ativar conhecimento prévio
-   - Instruções passo a passo para o professor
-
-4. APRESENTAÇÃO DO CONTEÚDO (com tempo exato)
-   - Como introduzir a língua-alvo
-   - Pontos gramaticais ou lexicais principais
-   - Dicas para o professor e problemas antecipados
-
-5. PRÁTICA CONTROLADA (com tempo exato)
-   - Pelo menos 2 atividades estruturadas
-   - Instruções detalhadas para cada uma
-
-6. PRODUÇÃO LIVRE / ATIVIDADE COMUNICATIVA (com tempo exato)
-   - Atividade mais livre
-   - Como configurar e monitorar
-
-7. ENCERRAMENTO E AVALIAÇÃO (com tempo exato)
-   - Como fechar a aula
-   - Técnica rápida de feedback
-
-8. DICAS DE DIFERENCIAÇÃO
-   - Como adaptar para alunos mais fortes ou mais fracos na mesma turma
-
-9. TAREFA DE CASA
-   - Uma tarefa significativa com instruções claras
-
-Torne o plano prático, criativo e pronto para usar imediatamente. Adapte vocabulário, complexidade e tipos de atividade ao nível ${selectedLevel} e ao público ${type}.`
+Estruture com:
+1. VISÃO GERAL
+2. MATERIAIS
+3. AQUECIMENTO (com tempo)
+4. APRESENTAÇÃO (com tempo)
+5. PRÁTICA CONTROLADA (com tempo, 2 atividades)
+6. PRODUÇÃO LIVRE (com tempo)
+7. ENCERRAMENTO
+8. DIFERENCIAÇÃO
+9. TAREFA DE CASA`
 
     : `[LESSON PLAN GENERATOR]
-Create a complete, detailed English lesson plan with the following specifications:
-
-LEVEL: ${selectedLevel} — ${levelDesc[selectedLevel]}
+Create a complete English lesson plan.
+LEVEL: ${selectedLevel}
 STUDENT TYPE: ${type}
 DURATION: ${dur}
 CLASS SIZE: ${size}
 TOPIC: ${topic}
-TEACHING APPROACH: ${approach}
-SKILLS FOCUS: ${skills}
-${notes ? 'SPECIAL NOTES: ' + notes : ''}
+APPROACH: ${approach}
+SKILLS: ${skills}
+${notes ? 'NOTES: ' + notes : ''}
 
-Structure the lesson plan with these sections:
-1. LESSON OVERVIEW — title, level, duration, 3 measurable objectives
-2. MATERIALS & PREPARATION
-3. WARM-UP (with exact timing) — step-by-step teacher instructions
-4. PRESENTATION (with exact timing) — key language points, teacher tips, anticipated problems
-5. CONTROLLED PRACTICE (with exact timing) — at least 2 structured activities
-6. FREE PRODUCTION (with exact timing) — freer activity, how to set up and monitor
-7. WRAP-UP & ASSESSMENT (with exact timing)
-8. DIFFERENTIATION TIPS — stronger and weaker students
-9. HOMEWORK — one meaningful task with clear instructions
+Include:
+1. OVERVIEW
+2. MATERIALS
+3. WARM-UP (with timing)
+4. PRESENTATION (with timing)
+5. CONTROLLED PRACTICE (with timing, 2 activities)
+6. FREE PRODUCTION (with timing)
+7. WRAP-UP
+8. DIFFERENTIATION
+9. HOMEWORK`;
 
-Make it practical, creative, and ready to use immediately.`;
+  const resultArea = document.getElementById('result-area');
+  const resultBox  = document.getElementById('result-box');
+  resultArea.style.display = 'block';
+  resultBox.className = 'result-box loading';
+  resultBox.textContent = isPt ? 'Gerando seu plano de aula...' : 'Generating lesson plan...';
 
-  const noteEl = document.getElementById('sent-note');
-  noteEl.innerHTML = isPt
-    ? '<strong>Plano enviado!</strong> O plano completo em português aparecerá no chat abaixo em instantes.'
-    : '<strong>Sent!</strong> Your full lesson plan will appear in the chat below.';
-  noteEl.style.display = 'block';
-  setTimeout(() => noteEl.style.display = 'none', 6000);
-function formatLessonPlan(plainText) {
-    // Divide o texto em seções (baseado nos números 1., 2., etc.)
-   const sections = plainText.split(/\d\./);
-    
-    let html = '<div class="lesson-plan-card">';
-    
-    // Título principal
-    html += `
-        <div class="plan-section" style="background: #f8fafc; border: 2px solid #3b82f6;">
-            <h3 style="border-bottom: none; margin-bottom: 0;">
-                <span class="section-icon">🎓</span> 
-                Plano de Aula Gerado
-            </h3>
-        </div>
-    `;
-    
-    // Processa cada seção
-    const sectionTitles = [
-        'VISÃO GERAL DA AULA',
-        'MATERIAIS E PREPARAÇÃO',
-        'AQUECIMENTO (Warm-up)',
-        'APRESENTAÇÃO',
-        'PRÁTICA CONTROLADA',
-        'PRODUÇÃO LIVRE',
-        'ENCERRAMENTO E AVALIAÇÃO',
-        'DICAS DE DIFERENCIAÇÃO',
-        'TAREFA DE CASA'
-    ];
-    
-    const sectionIcons = ['📋', '📦', '🔥', '📘', '✍️', '🎯', '🏁', '🎯', '🏠'];
-    
-    sections.forEach((section, index) => {
-        if (index === 0) return; // Pula o texto antes do primeiro número
-        
-        const title = sectionTitles[index-1] || `Seção ${index}`;
-        const icon = sectionIcons[index-1] || '📌';
-        
-        // Processa a seção para adicionar formatação especial
-        let content = section
-            .replace(/Título:/g, '<strong>Título:</strong>')
-            .replace(/Objetivos:/g, '<strong>Objetivos:</strong>')
-            .replace(/Passo a passo:/g, '<strong>Passo a passo:</strong>')
-            .replace(/💡 Dica:/g, '<div class="dica-box">💡 <strong>Dica:</strong>')
-            .replace(/\n\n/g, '</p><p>');
-        
-        // Fecha a dica box se foi aberta
-        if (content.includes('dica-box')) {
-            content += '</div>';
-        }
-        
-        html += `
-            <div class="plan-section">
-                <h3>
-                    <span class="section-icon">${icon}</span> 
-                    ${index}. ${title}
-                    ${content.includes('min') ? '<span class="timing-badge">' + content.match(/\d+\s*min/)?.[0] + '</span>' : ''}
-                </h3>
-                <div class="section-content">
-                    ${content}
-                </div>
-            </div>
-        `;
-    });
-    
-    html += '</div>';
-    return html;
+  const resposta = await sendPrompt(prompt);
+  
+  resultBox.className = 'result-box';
+  resultBox.innerHTML = formatLessonPlan(resposta);
 }
-function copiarPlano() {
-  const chatBox = document.getElementById("chat-box");
-  const textoPlano = chatBox.innerText;
-  
-  if (!textoPlano || textoPlano.includes("Pensando...") || textoPlano === "") {
-    alert("Nenhum plano gerado ainda!");
-    return;
-  }
-  
-  navigator.clipboard.writeText(textoPlano).then(() => {
-    const btn = document.getElementById("copiar-btn");
-    const textoOriginal = btn.innerHTML;
-    btn.innerHTML = "✅ Copiado!";
-    btn.style.background = "#4CAF50";
-    
-    setTimeout(() => {
-      btn.innerHTML = textoOriginal;
-      btn.style.background = "#4a7c6f";
-    }, 2000);
-  }).catch(() => {
-    alert("Erro ao copiar. Tente novamente.");
+
+function copyResult() {
+  const text = document.getElementById('result-box').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✓ Copiado!';
+    setTimeout(() => btn.textContent = 'Copiar texto', 2000);
   });
 }
-
-// 🆕 FUNÇÃO PDF - ADICIONE AQUI
-function baixarPDF() {
-  const chatBox = document.getElementById("chat-box");
-  const conteudo = chatBox.innerHTML;
-  
-  if (!conteudo || conteudo.includes("Pensando...") || conteudo === "") {
-    alert("Nenhum plano gerado ainda!");
-    return;
-  }
-  
-  const btn = document.getElementById("pdf-btn");
-  const textoOriginal = btn.innerHTML;
-  btn.innerHTML = "🖨️ Preparando...";
-  
-  const win = window.open('', '_blank');
-  win.document.write(`
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>Plano de Aula - English Teacher</title>
-      <style>
-        body { font-family: 'DM Sans', Arial, sans-serif; padding: 30px; max-width: 800px; margin: 0 auto; background: #f8f6f1; }
-        .plan-section { border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 16px; padding: 20px; background: white; }
-        h3 { margin: 0 0 12px 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
-        .dica-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 12px; font-style: italic; }
-        @media print { button { display: none; } }
-      </style>
-    </head>
-    <body>
-      <h1>📚 Plano de Aula - Inglês</h1>
-      ${conteudo}
-      <button onclick="window.print()" style="padding: 10px 20px; background: #4a7c6f; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px;">
-        🖨️ Imprimir / Salvar como PDF
-      </button>
-    </body>
-    </html>
-  `);
-  win.document.close();
-  
-  setTimeout(() => {
-    btn.innerHTML = textoOriginal;
-  }, 1000);
-}
 </script>
+</body>
+</html>
