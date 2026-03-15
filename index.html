@@ -291,6 +291,38 @@ function copyResult() {
     setTimeout(() => btn.textContent = 'Copiar texto', 2000);
   });
 }
+</script><script>
+
+async function sendMessage(){
+
+const message = document.getElementById("userInput").value;
+
+const res = await fetch("/api/ai?message=" + encodeURIComponent(message));
+
+const data = await res.json();
+
+const reply = data.choices[0].message.content;
+
+document.getElementById("response").innerHTML = "<b>AI:</b> " + reply;
+
+}
+
+</script> <script>
+
+async function sendMessage(){
+
+const message = document.getElementById("userInput").value;
+
+const res = await fetch("/api/ai?message=" + encodeURIComponent(message));
+
+const data = await res.json();
+
+const reply = data.choices[0].message.content;
+
+document.getElementById("response").innerHTML = "<b>AI:</b> " + reply;
+
+}
+
 </script>
 </body> <h2>AI English Teacher</h2>
 
