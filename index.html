@@ -277,10 +277,7 @@ const text = data.choices?.[0]?.message?.content || "No response";
 
 resultBox.className = 'result-box';
 resultBox.textContent = text || (isPt ? 'Nenhuma resposta recebida.' : 'No response received.');
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1500,
-        system: 'You are an expert English teacher and curriculum designer. When asked in Portuguese, write the entire lesson plan in Brazilian Portuguese (only English examples stay in English). Be practical, detailed and ready-to-use.',
-        messages: [{role:'user', content: prompt}]
+        
       })
     });
     const data = await res.json();
