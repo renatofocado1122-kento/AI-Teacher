@@ -56,7 +56,7 @@ resultArea.style.display = "block";
 
 resultBox.innerHTML = "Gerando plano...";
 
-try{
+try {
 
 const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
 
@@ -64,13 +64,18 @@ const data = await res.json();
 
 const text = data.choices?.[0]?.message?.content || "No response";
 
-resultBox.innerText = text;
+resultBox.className = 'result-box';
 
-}catch(error){
+resultBox.textContent =
+  text || (isPt ? 'Nenhuma resposta recebida.' : 'No response received.');
 
-resultBox.innerText = "Erro ao conectar com a IA.";
+} catch(e) {
 
-}
+resultBox.className = 'result-box';
+
+resultBox.textContent = isPt
+  ? 'Erro ao conectar com a IA. Tente novamente.'
+  : 'Error connecting to AI. Please try again.';
 
 }
 
