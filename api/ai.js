@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-       "Authorization": "Bearer " + process.env.GOJO
+        "Authorization": "Bearer " + process.env.GROQ_API_KEY  // ✅ CORRETO!
       },
       body: JSON.stringify({
         model: "mixtral-8x7b-32768",
