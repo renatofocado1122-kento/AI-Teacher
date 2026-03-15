@@ -291,43 +291,45 @@ function copyResult() {
     setTimeout(() => btn.textContent = 'Copiar texto', 2000);
   });
 }
-</script><script>
+<script>
 
 async function sendMessage(){
 
 const message = document.getElementById("userInput").value;
 
+if(!message) return;
+
+document.getElementById("response").innerHTML = "Thinking...";
+
+try{
+
 const res = await fetch("/api/ai?message=" + encodeURIComponent(message));
 
 const data = await res.json();
 
-const reply = data.choices[0].message.content;
+const reply = data.choices?.[0]?.message?.content || "No response";
 
 document.getElementById("response").innerHTML = "<b>AI:</b> " + reply;
+
+}catch(error){
+
+document.getElementById("response").innerHTML = "Error connecting to AI";
 
 }
-
-</script> <script>
-
-async function sendMessage(){
-
-const message = document.getElementById("userInput").value;
-
-const res = await fetch("/api/ai?message=" + encodeURIComponent(message));
-
-const data = await res.json();
-
-const reply = data.choices[0].message.content;
-
-document.getElementById("response").innerHTML = "<b>AI:</b> " + reply;
 
 }
 
 </script>
-</body> <h2>AI English Teacher</h2>
+
+<hr class="divider">
+
+<h2>AI English Teacher Chat</h2>
 
 <input id="userInput" type="text" placeholder="Type your sentence in English..." />
+
 <button onclick="sendMessage()">Send</button>
 
 <div id="response" style="margin-top:20px;"></div>
+
+</body>
 </html>
