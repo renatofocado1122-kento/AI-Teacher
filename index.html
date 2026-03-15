@@ -261,7 +261,7 @@ async function generate() {
   resultBox.textContent = isPt ? 'Gerando seu plano de aula... aguarde.' : 'Generating your lesson plan...';
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
