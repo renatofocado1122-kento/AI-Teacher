@@ -291,6 +291,18 @@ function copyResult() {
     setTimeout(() => btn.textContent = 'Copiar texto', 2000);
   });
 }
+</script>
+
+<hr class="divider">
+
+<h2>AI English Teacher Chat</h2>
+
+<input id="userInput" type="text" placeholder="Type your sentence in English..." />
+
+<button onclick="sendMessage()">Send</button>
+
+<div id="response" style="margin-top:20px;"></div>
+
 <script>
 
 async function sendMessage(){
@@ -320,16 +332,6 @@ document.getElementById("response").innerHTML = "Error connecting to AI";
 }
 
 </script>
-
-<hr class="divider">
-
-<h2>AI English Teacher Chat</h2>
-
-<input id="userInput" type="text" placeholder="Type your sentence in English..." />
-
-<button onclick="sendMessage()">Send</button>
-
-<div id="response" style="margin-top:20px;"></div>
 
 </body>
 </html>
