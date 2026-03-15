@@ -18,21 +18,20 @@ export default async function handler(req, res) {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + process.env.GROQ_API_KEY
       },
-      body: JSON.stringify({
-        model: "mixtral-8x7b-32768",
-        messages: [
-          {
-            role: "system",
-            content: "Você é um assistente especializado em criar planos de aula de inglês. Responda sempre em português do Brasil."
-          },
-          {
-            role: "user",
-            content: message
-          }
-        ],
-        temperature: 0.7
-      })
-    });
+     body: JSON.stringify({
+  model: "llama3-8b-8192",
+  messages: [
+    {
+      role: "system",
+      content: "Você é um assistente especializado em criar planos de aula de inglês. Responda sempre em português do Brasil."
+    },
+    {
+      role: "user",
+      content: message
+    }
+  ],
+  temperature: 0.7
+})
 
     console.log("3. Status da resposta:", response.status);
     
