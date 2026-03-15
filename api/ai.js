@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+exportexport default async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   
@@ -18,20 +18,21 @@ export default async function handler(req, res) {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + process.env.GROQ_API_KEY
       },
-     body: JSON.stringify({
-  model: "llama3-8b-8192",
-  messages: [
-    {
-      role: "system",
-      content: "Você é um assistente especializado em criar planos de aula de inglês. Responda sempre em português do Brasil."
-    },
-    {
-      role: "user",
-      content: message
-    }
-  ],
-  temperature: 0.7
-})
+      body: JSON.stringify({
+        model: "llama3-8b-8192",
+        messages: [
+          {
+            role: "system",
+            content: "Você é um assistente especializado em criar planos de aula de inglês. Responda sempre em português do Brasil."
+          },
+          {
+            role: "user",
+            content: message
+          }
+        ],
+        temperature: 0.7
+      }) // ✅ VÍRGULA AQUI É OPCIONAL, É O ÚLTIMO ITEM
+    }); // ✅ FECHAMENTO CORRETO DO fetch
 
     console.log("3. Status da resposta:", response.status);
     
