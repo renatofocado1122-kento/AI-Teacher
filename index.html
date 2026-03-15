@@ -319,25 +319,34 @@ function copyResult() {
 
 async function sendMessage(){
 
-const message = document.getElementById("userInput").value;
+const input = document.getElementById("userInput");
+const message = input.value;
+input.value = "";
 
 if(!message) return;
 
 document.getElementById("response").innerHTML = "Thinking...";
 
-try{
+try {
 
-const res = await fetch("/api/ai?message=" + encodeURIComponent(message));
+const res = await fetch("/api/ai?message=" + encodeURIComponent(prompt));
 
 const data = await res.json();
 
-const reply = data.choices?.[0]?.message?.content || "No response";
+const text = data.choices?.[0]?.message?.content || "No response";
 
-document.getElementById("response").innerHTML = "<b>AI:</b> " + reply;
+resultBox.className = 'result-box';
 
-}catch(error){
+resultBox.textContent =
+  text || (isPt ? 'Nenhuma resposta recebida.' : 'No response received.');
 
-document.getElementById("response").innerHTML = "Error connecting to AI";
+} catch(e) {
+
+resultBox.className = 'result-box';
+
+resultBox.textContent = isPt
+  ? 'Erro ao conectar com a IA. Tente novamente.'
+  : 'Error connecting to AI. Please try again.';
 
 }
 
